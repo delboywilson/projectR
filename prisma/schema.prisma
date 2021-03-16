@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model BucketListItem {
+  id       Int        @id @default(autoincrement())
+  title    String     @db.VarChar(255)
+  author   User       @relation(fields: [authorId], references: [id])
+  authorId Int
+  Location Location[]
+}
+
+model Location {
+  id       Int            @id @default(autoincrement())
+  location String         @db.VarChar(255)
+  owner    BucketListItem @relation(fields: [ownerId], references: [id])
+  ownerId  Int
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  email           String           @unique
+  name            String?
+  bucketListItems BucketListItem[]
+}
