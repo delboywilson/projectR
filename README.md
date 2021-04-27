@@ -1,5 +1,5 @@
 # projectR
 
-Class project for INCODE2
+Class project for INCO Academy's INCODE Web Develompment Bootcamp
 
-Test
+Exploring React and Prisma
